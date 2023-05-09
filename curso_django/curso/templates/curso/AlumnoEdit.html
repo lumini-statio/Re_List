@@ -1,0 +1,35 @@
+{% extends 'curso/layout.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+    {% if form.errors %}
+
+        <div class="alert alert-danger" role="alert">
+            A simple danger alert—check it out!
+        </div>
+
+    {% endif %}
+
+    <h1>Actualización de Alumnos</h1>
+
+    <form action="{% url 'actualizar' alumno.id %}" method="POST">
+
+        {% csrf_token %}
+        {% if mensaje %}
+
+            <div class="alert alert-success" role="alert">
+                Alumno Actualizado Exitosamente
+            </div>
+
+        {% endif %}
+
+        {{ form|crispy }}
+
+        <button type="submit" class="btn btn-dark">Guardar</button>
+        <a href="{% url 'listar' %}" class="btn btn-danger">Cancelar</a>
+
+
+    </form>
+
+{% endblock %}
